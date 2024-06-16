@@ -48,5 +48,24 @@ public class SignUpDtoTest {
         });
     }
 
+    @DisplayName("Validation password patter 에러")
+    @Test
+    void getPassWordPattern () {
+        //Given
+        SignupRequestDto signupRequestDto = new SignupRequestDto();
+        signupRequestDto.setUserId("tteesstt01");
+        signupRequestDto.setUserName("nooooooo");
+        signupRequestDto.setPassword("Ttteessttt01!");
+        signupRequestDto.setEmail("test@gmail.com");
+
+        //When
+        Set<ConstraintViolation<SignupRequestDto>> violations = validator.validate(signupRequestDto);
+
+        //Then
+        violations.forEach(error -> {
+            assertThat(error.getMessage()).isEqualTo("비밀번호는 대소문자 영문, 숫자, 특수문자를 최소 1글자씩 포함하며 최소 10자 이상이어야 합니다.");
+        });
+    }
+
 
 }
