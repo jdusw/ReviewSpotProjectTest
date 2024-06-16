@@ -91,7 +91,7 @@ public class CommentControllerTest {
 
     @Test
     @DisplayName("댓글 등록")
-    void CommentPost() throws Exception {
+    void postComment() throws Exception {
 
         this.mockUserSetup();
 
@@ -132,7 +132,7 @@ public class CommentControllerTest {
 
     @Test
     @DisplayName("댓글 등록 실패")
-    void CommentPostFali() throws Exception {
+    void postCommentFail() throws Exception {
 
         this.mockUserSetup();
 
@@ -165,7 +165,7 @@ public class CommentControllerTest {
 
     @Test
     @DisplayName("댓글 수정")
-    void CommentUpdate() throws Exception {
+    void updateComment() throws Exception {
         this.mockUserSetup();
 
         Long commentId = 1L;
@@ -202,7 +202,7 @@ public class CommentControllerTest {
 
     @Test
     @DisplayName("댓글 수정 실패")
-    void CommentUpdateFali() throws Exception {
+    void updatePostFali() throws Exception {
         this.mockUserSetup();
 
         Long commentId = 1L;
@@ -234,7 +234,7 @@ public class CommentControllerTest {
 
     @Test
     @DisplayName("댓글 삭제")
-    void CommentDelete() throws Exception {
+    void deleteComment() throws Exception {
         this.mockUserSetup();
 
         Long commentId = 1L;
@@ -256,7 +256,7 @@ public class CommentControllerTest {
 
     @Test
     @DisplayName("댓글 삭제 실패")
-    void CommentDeleteFail() throws Exception {
+    void deleteCommentFail() throws Exception {
         this.mockUserSetup();
 
         Long commentId = null;
@@ -274,7 +274,7 @@ public class CommentControllerTest {
 
     @Test
     @DisplayName("댓글 조회")
-    void CommentAll() throws Exception {
+    void allComment() throws Exception {
         this.mockUserSetup();
 
         Long postId = 1L;
