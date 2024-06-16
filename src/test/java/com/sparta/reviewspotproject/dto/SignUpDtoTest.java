@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SignUpDtoTest {
 
@@ -29,14 +30,30 @@ public class SignUpDtoTest {
         validatorFactory.close();
     }
 
+    @Test
+    void getAll() {
+        //Given
+        SignupRequestDto signupRequestDto = new SignupRequestDto();
+        signupRequestDto.setUserId("testidee01");
+        signupRequestDto.setPassword("Testpassword1!");
+        signupRequestDto.setUserName("test");
+        signupRequestDto.setEmail("test@gmail.com");
+
+        //When & Then
+        assertEquals("testidee01", signupRequestDto.getUserId());
+        assertEquals("Testpassword1!", signupRequestDto.getPassword());
+        assertEquals("test", signupRequestDto.getUserName());
+        assertEquals("test@gmail.com", signupRequestDto.getEmail());
+    }
+
     @DisplayName("Validation userId patter 에러")
     @Test
     void getUserIdPattern() {
         //given
         SignupRequestDto signupRequestDto = new SignupRequestDto();
         signupRequestDto.setUserId("악");
-        signupRequestDto.setUserName("itmaname1");
         signupRequestDto.setPassword("Ttteessttt01!");
+        signupRequestDto.setUserName("test");
         signupRequestDto.setEmail("test@gmail.com");
 
         //When
@@ -54,8 +71,8 @@ public class SignUpDtoTest {
         //Given
         SignupRequestDto signupRequestDto = new SignupRequestDto();
         signupRequestDto.setUserId("tteesstt01");
-        signupRequestDto.setUserName("nooooooo");
-        signupRequestDto.setPassword("Ttteessttt01!");
+        signupRequestDto.setPassword("nooooooo");
+        signupRequestDto.setUserName("test");
         signupRequestDto.setEmail("test@gmail.com");
 
         //When
@@ -67,5 +84,61 @@ public class SignUpDtoTest {
         });
     }
 
+    @DisplayName("Validation userName blank 에러")
+    @Test
+    void getUserNameBlank () {
+        //given
+        SignupRequestDto signupRequestDto = new SignupRequestDto();
+        signupRequestDto.setUserId("tteesstt01");
+        signupRequestDto.setPassword("Ttteessttt01!");
+        signupRequestDto.setUserName("");
+        signupRequestDto.setEmail("test@gmail.com");
 
+        //When
+        Set<ConstraintViolation<SignupRequestDto>> violations = validator.validate(signupRequestDto);
+
+        //Then
+        violations.forEach(error -> {
+            assertThat(error.getMessage()).isEqualTo("이름을 입력해주세요");
+        });
+    }
+
+    @DisplayName("Validation email blank 에러")
+    @Test
+    void getEmailBlank () {
+        //given
+        SignupRequestDto signupRequestDto = new SignupRequestDto();
+        signupRequestDto.setUserId("testidee01");
+        signupRequestDto.setPassword("Testpassword1!");
+        signupRequestDto.setUserName("test");
+        signupRequestDto.setEmail("");
+
+        //When
+        Set<ConstraintViolation<SignupRequestDto>> violations = validator.validate(signupRequestDto);
+
+        //Then
+        assertThat(violations).isNotEmpty();
+        violations.forEach(error -> {
+            assertThat(error.getMessage()).isEqualTo("Email을 입력해주세요.");
+        });
+    }
+
+    @DisplayName("Validation email 에러")
+    @Test
+    void getEmailError () {
+        //given
+        SignupRequestDto signupRequestDto = new SignupRequestDto();
+        signupRequestDto.setUserId("testidee01");
+        signupRequestDto.setPassword("Testpassword1!");
+        signupRequestDto.setUserName("test");
+        signupRequestDto.setEmail("testgmail.com");
+
+        //When
+        Set<ConstraintViolation<SignupRequestDto>> violations = validator.validate(signupRequestDto);
+
+        //Then
+        violations.forEach(error -> {
+            assertThat(error.getMessage()).isEqualTo("유효한 이메일을 입력해주세요.");
+        });
+    }
 }
