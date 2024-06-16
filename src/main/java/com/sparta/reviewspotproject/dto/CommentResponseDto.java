@@ -2,10 +2,14 @@ package com.sparta.reviewspotproject.dto;
 
 import com.sparta.reviewspotproject.entity.Comment;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Setter
 @Getter
+@RequiredArgsConstructor
 public class CommentResponseDto {
     private Long id;
     private String contents;
