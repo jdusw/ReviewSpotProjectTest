@@ -1,6 +1,7 @@
 package com.sparta.reviewspotproject.config;
 
 
+import com.sparta.reviewspotproject.aop.AllController;
 import com.sparta.reviewspotproject.jwt.JwtUtil;
 import com.sparta.reviewspotproject.security.JwtAuthenticationFilter;
 import com.sparta.reviewspotproject.security.JwtAuthorizationFilter;
@@ -27,6 +28,10 @@ public class WebSecurityConfig {
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
+
+    //AOP Bean 등록
+    @Bean
+    public AllController allController(){return new AllController();}
 
     @Bean
     public PasswordEncoder passwordEncoder() {
