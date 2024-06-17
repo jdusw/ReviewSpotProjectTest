@@ -93,8 +93,8 @@ public class PostControllerTest {
         this.mockUserSetup();
 
         PostRequestDto postRequestDto = PostRequestDto.builder()
-                .title("이게 맞는걸까")
-                .contents("이렇게하는걸까..?")
+                .title("게시글 테스트")
+                .contents("게스글 테스트 내용")
                 .build();
 
         String postInfo = objectMapper.writeValueAsString(postRequestDto);
@@ -120,8 +120,8 @@ public class PostControllerTest {
                 )
                 .andExpect(jsonPath("$.postId").value(1L))
                 .andExpect(jsonPath("$.userId").value(1L))
-                .andExpect(jsonPath("$.title").value("이게 맞는걸까"))
-                .andExpect(jsonPath("$.contents").value("이렇게하는걸까..?"))
+                .andExpect(jsonPath("$.title").value("게시글 테스트"))
+                .andExpect(jsonPath("$.contents").value("게스글 테스트 내용"))
                 .andExpect(jsonPath("$.createAt").exists())
                 .andExpect(jsonPath("$.modifiedAt").exists())
                 .andExpect(jsonPath("$.postLikesCount").value(0))
@@ -135,7 +135,7 @@ public class PostControllerTest {
         this.mockUserSetup();
 
         PostRequestDto postRequestDto = PostRequestDto.builder()
-                .title("이게 맞는걸까")
+                .title("게시글 제목")
                 .contents("")
                 .build();
 
@@ -172,8 +172,8 @@ public class PostControllerTest {
         Long postId = 1L;
 
         PostRequestDto postRequestDto = PostRequestDto.builder()
-                .title("이게 맞는걸까")
-                .contents("이렇게하는걸까..?")
+                .title("제목")
+                .contents("내용")
                 .build();
 
         String postInfo = objectMapper.writeValueAsString(postRequestDto);
@@ -242,8 +242,8 @@ public class PostControllerTest {
         Long postId = 1L;
 
         PostRequestDto postRequestDto = PostRequestDto.builder()
-                .title("이제는 될 때가 되었습니다")
-                .contents("되라고")
+                .title("게시글 제목")
+                .contents("게시글 내용")
                 .build();
 
         PostResponseDto postResponseDto = new PostResponseDto();
@@ -265,8 +265,8 @@ public class PostControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.postId").value(1L))
                 .andExpect(jsonPath("$.userId").value(1L))
-                .andExpect(jsonPath("$.title").value("이제는 될 때가 되었습니다"))
-                .andExpect(jsonPath("$.contents").value("되라고"))
+                .andExpect(jsonPath("$.title").value("게시글 제목"))
+                .andExpect(jsonPath("$.contents").value("게시글 내용"))
                 .andExpect(jsonPath("$.createAt").exists())
                 .andExpect(jsonPath("$.modifiedAt").exists())
                 .andExpect(jsonPath("$.postLikesCount").value(0))
